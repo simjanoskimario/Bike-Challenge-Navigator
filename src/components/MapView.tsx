@@ -14,42 +14,54 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 // Morning Commute Path (Blue)
-const morningCommutePath: [number, number][] = [[51.505, -0.09], [51.506, -0.092], [51.507, -0.094], [51.508, -0.096], [51.509, -0.098], [51.51, -0.1], [51.512, -0.102], [51.514, -0.1], [51.515, -0.09]];
-// EuroVelo Routes
+const morningCommutePath: [number, number][] = [
+  [45.5488, 13.7301], // Koper Center
+  [45.5465, 13.730], // Semedela
+  [45.5430, 13.7320], // Coastal Path (Parenzana)
+  [45.5430, 13.7120], // Coastal Path (Parenzana)
+
+  [45.5400, 13.6850], // Entering Izola
+  [45.5395, 13.6650], // Izola Marina
+  [45.5410, 13.6580]  // Izola Old Town
+];// EuroVelo Routes
+
+// EuroVelo Routes - EV9 passes through Slovenia to the coast
 const euroVeloRoutes = [{
-  id: 'EV1',
-  name: 'Atlantic Coast Route',
+  id: 'EV9',
+  name: 'Amber Route (Baltic–Adriatic)',
   color: '#F59E0B',
-  path: [[51.505, -0.09], [51.51, -0.1], [51.52, -0.12]]
-}, {
-  id: 'EV6',
-  name: 'Atlantic-Black Sea',
-  color: '#F59E0B',
-  path: [[51.515, -0.09], [51.52, -0.08], [51.53, -0.07]]
+  path: [
+    [45.5550, 13.7500], 
+    [45.5488, 13.7301], 
+    [45.5350, 13.7100], 
+    [45.5150, 13.6900]
+  ]
 }];
-// Saved Places with Images
+
+// Saved Places with Images - Real landmarks in Koper/Izola
 const savedPlaces = [{
   id: 1,
-  name: 'Hidden Waterfall',
-  note: 'Great spot for lunch',
-  pos: [51.51, -0.095],
-  icon: 'water',
-  image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=400&h=300&fit=crop'
+  name: 'Praetorian Palace',
+  note: 'Main square of Koper',
+  pos: [45.5483, 13.7296],
+  icon: 'palace',
+  image: 'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxY2_Lz_zpKr5pYLWfvokreUUMtvGIqgEPI2A85OMipIlnPNwi-UhwoIupTnIaysm9zq35_obH1NK7GXvd2LreT4NMPk9Q9i-oEMRR5CBlNPxSC5E3s0NItoyr1tevf_nmk6yiQog=s680-w680-h510-rw'
 }, {
   id: 2,
-  name: 'Sunset Ridge',
-  note: 'Best view at 7pm',
-  pos: [51.508, -0.092],
-  icon: 'mountain',
-  image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+  name: 'Svetilnik Beach',
+  note: 'Best sunset in Izola',
+  pos: [45.5430, 13.6550],
+  icon: 'beach',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTLrqwlI5KWq2yahYGPGUEaBSOQliNWUl1Gg&s'
 }, {
   id: 3,
-  name: 'Old Mill Cafe',
-  note: 'Amazing coffee stop',
-  pos: [51.513, -0.098],
-  icon: 'cafe',
-  image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop'
+  name: 'Sečovlje Salt Pans',
+  note: 'Famous salt fields nearby',
+  pos: [45.4920, 13.6120],
+  icon: 'nature',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOQrgN9Y2wc-957tyCVwKMPw669KaukTPk3A&s'
 }];
+
 export function MapView({
   showEuroVelo = false,
   onToggleEuroVelo
@@ -58,7 +70,7 @@ export function MapView({
   onToggleEuroVelo?: () => void;
 }) {
   return <div className="absolute inset-0 z-0 bg-[#0F1419]">
-      <MapContainer center={[51.51, -0.095]} zoom={14} scrollWheelZoom={true} zoomControl={false} className="w-full h-full" style={{
+      <MapContainer center={[45.5488, 13.7301]} zoom={14} scrollWheelZoom={true} zoomControl={false} className="w-full h-full" style={{
       background: '#0F1419'
     }}>
         {/* Dark Tiles */}

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Users, Mountain, Map, ArrowRight, Zap, Trophy, Heart, Coffee, Bike } from 'lucide-react';
+import { Users, Mountain, Map, ArrowRight, Zap, Trophy, Heart, Coffee, Bike, SectionIcon } from 'lucide-react';
 export function ChallengesView({ onNavigateToCamping }: { onNavigateToCamping: () => void }) {
   
   const forYouChallenges = [
@@ -209,7 +209,14 @@ export function ChallengesView({ onNavigateToCamping }: { onNavigateToCamping: (
       {/* Header */}
       <div className="flex justify-between items-end mb-8 px-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-100 mb-1 tracking-tight">Recommended rides</h1>
+          <div className="flex align-items-center gap-2 mb-2">
+            <h1 className="text-5xl font-bold text-slate-100 mb-1 tracking-tight">CycleGO</h1>
+            <Bike className="text-emerald-400" size={52} />
+          </div>
+          
+          <br />
+
+          <h3 className="text-3xl font-bold text-slate-100 mb-1 tracking-tight">Recommended rides</h3>
           <p className="text-slate-400 text-sm">Push your limits today</p>
         </div>
         <button className="px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium flex items-center gap-2 hover:bg-emerald-500/20 transition-all">
