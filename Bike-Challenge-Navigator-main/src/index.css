@@ -1,0 +1,49 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #10B981; /* Forest Green */
+  --color-secondary: #F59E0B; /* Warm Amber */
+  --color-accent: #0EA5E9; /* Sky Blue */
+  --color-earth: #92400E; /* Earth Brown */
+  --color-bg: #0F1419; /* Warmer Dark */
+  --color-surface: #1E293B; /* Slate Surface */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: #F1F5F9;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Leaflet Customization for Adventure Theme */
+.leaflet-popup-content-wrapper {
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(10px);
+  color: #F1F5F9;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+}
+.leaflet-popup-tip {
+  background: rgba(30, 41, 59, 0.95);
+}
+.leaflet-container {
+  background: var(--color-bg);
+}
+.leaflet-control-zoom {
+  display: none;
+}
+
+/* Fog of War Effect */
+.fog-overlay {
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
