@@ -14,6 +14,7 @@ export function App() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [showEuroVelo, setShowEuroVelo] = useState(false);
+  const [commute, setCommute] = useState(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -59,18 +60,21 @@ export function App() {
       </AnimatePresence>
 
       {/* Search Overlay */}
-      <MapSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <MapSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} onSelectIzola={() => setCommute(true)} />
 
       <main className="relative w-full h-full pb-16">
         {/* Map Layer - Always present but hidden when other tabs are active */}
         <div className={`absolute inset-0 transition-opacity duration-500 ${activeTab !== 'map' ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <MapView showEuroVelo={showEuroVelo} onToggleEuroVelo={() => setShowEuroVelo(!showEuroVelo)} />
+          <MapView showEuroVelo={showEuroVelo} onToggleEuroVelo={() => setShowEuroVelo(!showEuroVelo)}
+          commute={commute} 
+         />
         </div>
 
         {/* Bottom Sheet for Route Info - Only on Map tab */}
         <AnimatePresence>
-          {activeTab === 'map' && <BottomSheet isOpen={isSheetOpen} onClose={() => setIsSheetOpen(false)}>
-              <div onClick={() => setIsSheetOpen(true)}>
+          {(activeTab === 'map' && commute) && <BottomSheet  isOpen={isSheetOpen} onClose={() => {setIsSheetOpen(false)
+             setCommute(false)}}>
+              <div>
                 <MobileRouteSheet />
               </div>
             </BottomSheet>}

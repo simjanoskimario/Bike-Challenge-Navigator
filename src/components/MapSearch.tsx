@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, MapPin, Users, Trophy, Clock } from 'lucide-react';
+import { Search, X, MapPin, Users, Trophy, Clock, Flag } from 'lucide-react';
 interface MapSearchProps {
   isOpen: boolean;
   onClose: () => void;
 }
 export function MapSearch({
+  onSelectIzola,
   isOpen,
   onClose
 }: MapSearchProps) {
@@ -28,15 +29,15 @@ export function MapSearch({
   }];
   const recentSearches = [{
     icon: MapPin,
-    label: 'Central Park Loop',
-    sub: '8.5km • Easy'
+    label: 'Izola',
+    sub: '5.5km • Easy'
   }, {
-    icon: Users,
-    label: "Dad's Location",
-    sub: 'Last seen 5m ago'
+    icon: MapPin,
+    label: "Piran",
+    sub: '15.5km • Medium'
   }, {
-    icon: Trophy,
-    label: 'Weekend Warrior',
+    icon: Flag,
+    label: 'Italy',
     sub: 'Challenge • 2 days left'
   }];
   return <AnimatePresence>
@@ -87,7 +88,14 @@ export function MapSearch({
                 <button className="text-xs text-[#00f0ff]">Clear</button>
               </div>
               <div className="space-y-2">
-                {recentSearches.map((item, i) => <motion.button key={i} initial={{
+                {recentSearches.map((item, i) => <motion.button 
+                onClick={() => {
+                  if (item.label === 'Izola') {
+                    onSelectIzola(); // Activate path
+                  }
+                  onClose(); // Close search overlay
+                }}
+             key={i} initial={{
               opacity: 0,
               x: -20
             }} animate={{

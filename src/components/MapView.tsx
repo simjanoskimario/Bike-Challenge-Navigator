@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Polyline, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Layers } from 'lucide-react';
@@ -63,9 +63,11 @@ const savedPlaces = [{
 }];
 
 export function MapView({
+  commute=false,
   showEuroVelo = false,
   onToggleEuroVelo
 }: {
+  commute?: boolean;
   showEuroVelo?: boolean;
   onToggleEuroVelo?: () => void;
 }) {
@@ -77,12 +79,12 @@ export function MapView({
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
 
         {/* Morning Commute Path (Blue) */}
-        <Polyline positions={morningCommutePath} pathOptions={{
+        {commute==true? <Polyline positions={morningCommutePath} pathOptions={{
         color: '#0EA5E9',
         weight: 4,
         opacity: 0.8,
         lineCap: 'round'
-      }} />
+      }} />:null}
 
         {/* EuroVelo Layer */}
         {showEuroVelo && euroVeloRoutes.map(route => <Polyline key={route.id} positions={route.path as [number, number][]} pathOptions={{
@@ -101,7 +103,7 @@ export function MapView({
             </Polyline>)}
 
         {/* Saved Places with Images */}
-        {savedPlaces.map(place => <Marker key={place.id} position={place.pos as [number, number]}>
+        {commute == true && savedPlaces.map(place => <Marker key={place.id} position={place.pos as [number, number]}>
             <Popup maxWidth={300}>
               <div className="p-2">
                 <img src={place.image} alt={place.name} className="w-full h-32 object-cover rounded-lg mb-2" />
